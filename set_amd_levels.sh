@@ -110,6 +110,7 @@ esac
 # Sometimes card0 becames card1 after reboot, making sure it gets the right
 # settings anyway
 sclk[1]=${sclk[0]}
+fan[1]=${fan[0]}
 
 echo "Setting performance mode to: $PERF"
 
