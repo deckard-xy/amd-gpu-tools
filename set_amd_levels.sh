@@ -6,7 +6,15 @@
 # "01234"    => ~112 S/s
 # "0123"     => ~105 S/s
 
-source ${HOME}/.rigrc
+if [[ -f $RIGRC ]]
+then
+    source $RIGRC
+elif [[ -f ${RIGHOME}/.rigrc ]]
+then
+    source ${RIGHOME}/.rigrc
+else
+    source ${HOME}/.rigrc
+fi
 
 if [[ $RIG_PERFORMANCE_MODE ]]
 then
