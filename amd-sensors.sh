@@ -5,7 +5,7 @@ show_card()
     id=$1
     card=card$id
 
-    echo "======= Card $id ======="
+    echo "=========== Card $id ==========="
     echo "Fan speed:  " \
         $(bc <<< "scale=2; $(cat /sys/class/drm/${card}/device/hwmon/hwmon?/pwm1) * 100 / \
         $(cat /sys/class/drm/${card}/device/hwmon/hwmon?/pwm1_max)") \
@@ -32,17 +32,17 @@ show_gpu_stats()
 
 show_rig_status()
 {
-    echo "===== $(hostname) status: ====="
+    echo "========= $(hostname) status: ========="
     awk '   { if ($1 < 33000 ) fail++; } 
-        END { if (!fail) printf "|         OK         |";
-              else printf ">  " fail " GPU(s) down!!!  <" }' \
+        END { if (!fail) printf "|             OK             |";
+              else printf ">      " fail " GPU(s) down!!!      <" }' \
         /sys/class/drm/card?/device/hwmon/hwmon?/temp1_input
     echo
-    echo "----------------------"
-    echo -n "T: "
+    echo "+----------------------------+"
+    echo -n "| "
     awk '{ if (NR > 1) prefix=" | "; printf prefix $0/1000 }' /sys/class/drm/card?/device/hwmon/hwmon?/temp1_input
-    echo " |"
-    echo "======================"
+    echo " |        |"
+    echo "=============================="
     echo Uptime: $(uptime -p)
     echo Perf. mode: $(awk -F= '/^RIG_PERFORMANCE_MODE/ {print $2}' ${HOME}/.rigrc)
     echo Hashrate: $(tail -n15 ${HOME}/log/mine.log | awk '/\[Total\]/ { if ($17) rate=$17" "$18" "$19; else rate=$12" "$13" "$14} END {print rate}')
