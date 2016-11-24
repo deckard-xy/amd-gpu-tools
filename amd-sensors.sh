@@ -38,6 +38,10 @@ show_rig_status()
               else printf ">  " fail " GPU(s) down!!!  <" }' \
         /sys/class/drm/card?/device/hwmon/hwmon?/temp1_input
     echo
+    echo "----------------------"
+    echo -n "T: "
+    awk '{ if (NR > 1) prefix=" | "; printf prefix $0/1000 }' /sys/class/drm/card?/device/hwmon/hwmon?/temp1_input
+    echo " |"
     echo "======================"
     echo Uptime: $(uptime -p)
     echo Perf. mode: $(awk -F= '/^RIG_PERFORMANCE_MODE/ {print $2}' ${HOME}/.rigrc)
