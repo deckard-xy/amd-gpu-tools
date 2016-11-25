@@ -44,8 +44,8 @@ show_rig_status()
     echo " |        |"
     echo "=============================="
     echo Uptime: $(uptime -p)
-    echo Perf. mode: $(awk -F= '/^RIG_PERFORMANCE_MODE/ {print $2}' ${HOME}/.rigrc)
-    echo Hashrate: $(tail -n15 ${HOME}/log/mine.log | awk '/\[Total\]/ { if ($17) rate=$17" "$18" "$19; else rate=$12" "$13" "$14} END {print rate}')
+    echo Perf. mode: $(awk -F= '/^RIG_PERFORMANCE_MODE/ {print $2}' ${RIGHOME}/.rigrc)
+    echo Hashrate: $(tail -n15 ${RIGHOME}/log/mine.log | awk '/\[Total\]/ { if ($17) rate=$17" "$18" "$19; else rate=$12" "$13" "$14} END {print rate}')
     echo
 }
 
